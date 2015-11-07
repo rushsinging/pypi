@@ -1,4 +1,6 @@
 web:
     image: pypi
+    ports:
+        - 80:80
     volumes:
-        - ./data:/pypi_mirror/data
+        - ./data:/data

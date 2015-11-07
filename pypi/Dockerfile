@@ -1,6 +1,11 @@
 FROM python27
 
+RUN apt-get install -y --force-yes nginx \
+    && pip install devpi-server devpi-web \
+    && devpi-server --host pypi.wishstone.in --port 4040 --serverdir /data --gen-config \
+    && cp /gen-config/nginx-devpi.conf /etc/nginx/sites-enabled/ \
+    && rm /etc/nginx/sites-enabled/default \
+    && echo -e "devpi-server --port 4040 --start \n service nginx start \n tail -f /root/.devpi/server/.xproc/devpi-server/xprocess.log" > start.sh 
+    
+CMD sh start.sh
 
-RUN pip install virtualenv virtualenvwrapper && . `which virtualenvwrapper.sh` && pip install pep381client && mkdir -p pypi_mirror/data/
-
-CMD pep381run pypi_mirror/data/
