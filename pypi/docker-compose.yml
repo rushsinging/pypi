@@ -1,0 +1,4 @@
+web:
+    image: pypi
+    volumes:
+        - ./data:/pypi_mirror/data
