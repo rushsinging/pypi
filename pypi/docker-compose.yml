@@ -1,6 +1,9 @@
 web:
     image: pypi
     ports:
-        - 80:80
+        - 16720:16720
+    environment:
+        OUTSIDE_URL: "http://111.13.57.131:16720"
+        PYPI_HOST: 0.0.0.0
     volumes:
         - ./data:/data
